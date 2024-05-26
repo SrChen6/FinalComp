@@ -1,0 +1,281 @@
+Archivo de texto con la información sintetizada de las prácticas. 
+
+La idea de esto es tener un archivo txt por el cual poder buscar especificamente lo que te están preguntando, mediante ctrl + B/F/G dependiendo del caso.
+
+Notación: 
+>>>  comando del shell
+***  concepto
+#>> función de C 
+
+
+{S1}
+Las máquinas virtuales (VM) son una característica de los sistemas modernos que permite ejecutar casi cualquier sistema operativo (SO) sobre otra instalación de SO.
+El contenido de una máquina virtual puede ser capturado y guardarse, como una instantánea, en un único archivo, llamado imagen.
+El ordenador real en el que ha instalado la máquina virtual se denomina «Host», y el sistema que representa a la máquina virtual se llama «Guest».
+
+{S2}
+El directorio principal de la sesión Linux es donde se crean y guardan los archivos de configuración habituales de Unix (.login, .emacs...). No elimine este directorio o tendrá problemas para acceder a Linux.
+Shell o intérprete de línea de comandos es un programa que el SO nos ofrece para trabajar en modo texto interactivo. Hay varios intérpretes de línea de comandos, pero los más usuales son "tchs" y "bash [#SIEMPRE UTILIZAR bash].
+>>> chsh: cambia tu shell por defecto a otra.
+
+Toda las shells tienen comandos internos (las propias funciones del intérprete) y comandos externos (cualquier programa instalado en la maquina).
+>>> man [_]: ofrece documentación sobre comandos externos 
+>>> info [_]: ofrece información detallada del comando en formato textinfo
+>>> help [_]: ofrece información sintetizada del comando (propio de bash)
+
+*** command : un programa o utilidad que se ejecuta en la línea de comandos
+*** system call : una interfaz fundamental entre el espacio de usuario y el núcleo
+*** function/library call : una interfaz que normalmente se ejecutan en el espacio de usuario
+*** system driver : un componente de software que permite la interacción entre el sistema operativo y dispositivos de hardware específicos
+*** configuration file : un archivo local de Linux que controla el funcionamiento de un programa, utilidad o proceso.
+*** system component : podría ser el núcleo, el shell y los programas.
+*** administrative command : son comandos que proporcionan un sólido control sobre diversos aspectos del sistema operativo, como la gestión de usuarios, el control de procesos, la gestión del sistema de archivos, las redes y la seguridad
+
+Para navegar por un manual, avanzar de pagina utilizar 'space', volver a la anterior 'b', buscar un texto '/ <text>' ir a la siguiente vez que aparece el text 'n', para salir 'q'.
+
+El directorio base es el root, representado por /, se encuentra todos los archivos accesibles a todos los usuarios. Para cada usuario su respectivo directorio home será su base. 
+>>> cd : cambiar de archivo en la jerarquia del sistema
+>>> mkdir <name>: crear carpetas 
+>>> rmdir <name>: eliminar carpetas
+>>> ls : listado del contenido de la carpeta actual 
+	ls -la : enseña archivos ocultos y permisos
+
+El directorio tipo '.' referencia propio directorio actual, y el tipo '..' aquel inmediatamente por encima del actual
+
+>>> gedit <name> : abre el editor de texto.
+Mientras este archivo abierto por gedit continue abierto el Shell quedará bloqueada. Para evitarlo, hay que ejecutar el comando en segundo plano, e.g. $ gedit text &
+
+>>> cat: Muestra el contenido del fichero o ficheros especificados en el terminal de salida.
+>>> more: El comando more muestra el contenido del archivo en una pantalla cada vez para archivos grandes.
+>>> less: Similar a more pero con más caracteristicas. Permite avanzar y retroceder en el fichero, incluso con pipes.
+>>> copy <source> <destination>: Copiar archivos de una ubicación a otra. 
+>>> rm <name>: Elimina archivos
+>>> mv <ubi_actual> <nueva_ubi>: Mueve directorios o archivos de una ubicación a otra
+
+Cada archivo puede ser leido, escrito o executado (rwx) y estas acciones se pueden hacer desde tres lugares user, group, others (ugo)
+>>> chmod <permisos> <file> : Cambiar los permisos del archivo dado
+	e.g. chmod ugo+x file ; chmod ug=rwx file; chmod 640 file
+>>> grep <patron> <file>: busca por el archivo el patron dado
+
+>>> Caracteres especiales 
+-> * : substituye por cualquier group de caracteres (escepto . inicial) e.g. grep test t* [buscará por test en todos los archivos que su nombre empiece por t]
+-> > : redirige la salida de un ejecutable al destino dado e.g. ls > output_ls.txt
+-> >> : redirige pero en vez de sobre-escribir appendea
+-> | : Permite crear un pipe que comunica la salida de left con right
+-> ^ : especifica que el siguiente carácter está al principio de una línea.
+
+>>> mount: enumera el conjunto de sistemas de archivos disponibles en su entorno y el directorio en el que están montados.
+están montados.
+>>> alias <name> = <definition> : crea un alias e.g. $ alias ls='ls -la'
+Para hacer esta definición permanente añádela al archivo $HOME/.bashrc (mediante bash)
+
+*** Las variables de entorno: digamos que son como constantes que se pueden definir en un programa, pero se definen antes de iniciar el programa y suelen hacer referencia a aspectos del sistema. Los valores asignados a estas variables se puede acceder durante la ejecución de un programa a través de funciones de la librería C (getenv).
+>>> env: muestra el listado de variables definida en el entorno actual y sus valores
+>>> echo <file>: devuelve el contenido de este archivo
+	Muy típico, echo $HOME
+>>> export <varialbe>=<valor> : permite cambiar el valor de una variable (tipicamente de entorno)
+>>> pwd: Te muestra la ruta del directorio en que estás ubicado actualmente.
+>>> find {donde\_buscar} -iname {archivo\_a\_buscar}: Encontrar archivos
+>>> file <condicion> : informa sobre el contenido estimado del archivo proporcionado, e.g. file *.c
+>>> xxd <file>: muestra el contenido del archivo en formato hexadecimal
+	
+
+{S3}
+>>> git init: inicializa git en la carpeta actual creando una carpeta ocualta .git
+>>> git add (.)
+>>> git commit (-m)
+>>> git config (--global) <variable> <valor>
+>>> git log: comprobar modificaciones del repositorio
+	 git log --graph --branches: suele ser una commando muy tipico, a veces se crean aliases para este.
+>>> git reflog: Los registros de referencias, o «reflogs», registran cuándo se actualizaron las puntas de las ramas y otras referencias en el repositorio local.
+>>> git checkout: Actualiza los archivos del árbol de trabajo para que coincidan con la versión del índice o del árbol especificado.
+>>> git branch: muestran las ramas en el repositorio acutal
+	git branch <name>: crea la rama con dicho nombre
+	git branch -d <name>: elimina la rama con dicho nombre
+>>> git switch <branch>: cambiar de rama.
+>>> git merge <AA> <BB>: conectal el último commit de AA con la rama BB
+
+
+Archivos .c se basan en lenguaje C, mientras que .cc y .cpp en C++
+El main es una función que devuelve entero que tiene unos parametros ya definidos.
+Main devuelve 0 si la ejecucion a sido exitosa, de lo contrario indica un error.
+int main (int argc, char **argv) {}
+*** argc : argument counter, contabiliza cuantos argumentos hay (SIEMPRE argc>=1)
+*** argv : argument values, es una matrix de caracteres 
+Para el commando #>./program arg1 arg2 arg2 ; las asignaciones son
+argc = 4 ; argv[0] = "./program" ; argv[1]="arg1" ; argv[2]="arg2" ; argv[3]="arg3"
+
+#>> printf( <*char> ): Imprime por pantalla el array de chars dado e.g. printf("Hello World!\n");
+	Para imprimir otros valores se a de utilizar % e.g. printf("%d", &varName)
+#>> scanf(): Lee un valor por pantalla
+Las funciones de C se pueden consultar en el man.
+Algunas funciones con printf se han de incluir mediante librerias mediante indicadores (#___) en la cabecera del archivo #include <file.h> 
+
+
+Compilación permite traducir el programa de un lenguaje a otro.
+gcc -c hello.c ; creará un archivo objeto hello.o 
+gcc .o hello.exe hello.o; creará el ejecutable (el binario)
+./hello.exe ; para ejecutar
+Esto se simplifica a : gcc -o hello hello.c ; y crea el binario directamente
+
+El Makefile permite automatizar la compilacion de projectos. Consiste en un archivo de text con una cierta estructura muy rigida.
+Rule1: prerequisites 
+___tab__Actions
+El sistema tratará de ejecutar las acciones que definen una regla, y en caso de que falten prerequisitos (no existan los archivos con dicho nombre), pospondrá la ejecución hasta que estos archivos prerequisitos estén creados. Normalmente la creación de estos archivos implica la ejecución de otras reglas. e.g.
+hello: hello.o
+	gcc -o hello hello.o
+hello.o: hello.c
+	gcc -c hello.c
+Siempre que no se especifique lo contrario, la primera regle en mirarse será all, y de hay comienza el arbol de prerequisitos. e.g. all: hello
+Tambien pueden haber otras reglas disociadas de este arbol, e.g. 
+clean:
+	rm -f hello hello.o
+Para ejecutar estos comandos aislados se utiliza $ make clean
+
+#>> atoi() : convierte una serie de caracteres en un valor entero. 
+TODO comprovar calculadora S3
+
+{S4}
+***Compiler command line options
++>Getting help
+--help 				# simple help
+--help --verbose 		# help of the compiler driver and sub-processes. Most useful!!
+
++>Common options
+-S 				# generate assembly only (‘S’ with capital letter)
+-c 				# generate object file(s) only
+-o <name> 			# name the output file - can be assembly (-S), object (-c) or the executable
+
++>Code generation options (https://eli.thegreenplace.net/2012/01/03/understanding-the-x64-code-models)
+-fpic 				# generate position independent code – small mode.
+				# needed to build shared libraries
+-fPIC 				# generate position independent code – large mode. For shared libraries
+
++>Optimization options (https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)
+-O 				# equivalent to -O1
+-O0 				# do not optimize. Sometimes useful for debugging
+-O1 				# optimization level 1: basic optimizations that do not take compilation time
+				# merges constants, moves loop invariants…
+-O2 				# adds some more expensive optimizations:
+				# code alignment, partial inlining, switch conversion, store merging…
+-O3 				# adds even more expensive optimizations:
+				# inline functions, loop vectorize, loop distribution, loop interchange…
+
++>Debug support options
+-g 				# generates debug information, useful for gdb, ddd, etc.
+
++>Linking options
+-L<path> 			# adds path to the list of directories where to find libraries for linking
+-l<name> 			# adds lib<name>.so for shared linking, and/or lib<name>.a for static linking
+-shared 			# generates a shared library, instead of a binary executable
+-static # generates a statically linked binary executable
+
+
+>>> nm : una herramienta utilizada para mostrar la tabla de símbolos de un archivo de objetos.
+TODO significado de los simbolos
+
+Creación de una librería estatica (extensión -a)
+>>> ar <files> : Encapsular varios archivos de objetos en una sola biblioteca
+	-c : Crea una libreria
+	-s : crea un index de los archivos dentro de la libreria
+	-r : añade archivos a la libreria
+	-p : para imprimir los miembros especificados de un archivo en un fichero de salida estándar
+	-x : extrae del archivo cada uno de los miembros nombrados si no nombra el miembro a extraer extrae todo el archivo.
+Una vez creada la libreria, se puede compilar e.g. gcc -o fib-liba.exe fibonacci.c libCOMstatic.a
+
+Creacion de una libreria compartida (extension.so). Por defecto el compilardor asume que las librerias se enlazan dinamicamente. Se compila mediante la flag -fpic e.g. gcc -c -Wall -Werror -fpic foo.c
+Una vez compilado en un archivo objeto, es necesario convertirlo en libreria compartida. e.g. gcc -shared -o libfoo.so foo.o 
+Despues de esto, se compila un nuebo binario que implemente esta vez el binario correspondiente. 
+>>> ldd <file> : imprime las dependencias (entre otras las librerias dinamicamente enlazadas) de objetos compartidos.
+Podrías ser que la compilación no haya dado errores pero que el ejectuable no funcione. Esto se debe a que la variable de entorno LD_LIBRARY_PATH no incluye la ruta de la nueva libreria. e.g. export LD_LIBRARY_PATH=/home/username/foo:$LD_LIBRARY_PATH
+
+TODO como afecta las optimizaciones a los binarios staticos o dynamicos
+
+
+{S5}
+Debugging in Python e.g. python3 -m pdb ./test.py3
+El debugging ejecuta linea por linea 
+>>> n(ext): ejecuta la siguiente linea sin entrar en funciones 
+>>> s(tep): ejecuta la siguente linea entrando dentro de las funciones 
+>>> l(ist): Enlista el código fuente del archivo actual.
+>>> w(here): Imprime un seguimiento de la pila, con el frame más reciente en la parte inferior.
+>>> u(p): Mover el recuento de fotogramas actual (por defecto uno) niveles hacia arriba en la traza de la pila.
+>>> d(own): Desplazar el recuento de fotogramas actual (por defecto uno) niveles hacia abajo en la traza de la pila.
+>>> b(reak): Con un argumento lineno, establece una pausa allí en el archivo actual. Con un argumento de función, establece una pausa en la primera sentencia ejecutable dentro de esa función. 
+>>> display [expression]: Mostrar el valor de la expresión si ha cambiado, cada vez que se detiene la ejecución en el frame actual
+>>> var = __ : Cambia el valor de la varible var
+
+Debugging C programs e.g. gdb ./test
+Para inicializar el gdb es necesario utilizar run acompañado de los argumentos del ejecutable, e.g. run 6 
+El programa ejecuta de forma continua hasta el final salvo encuentre problemas o breakpoints.
+>>> list <funcion> : Enlista el código fuente.
+>>> break (<filename>):<line-number>  : Crea un breakpoint en la linea specificada, si no es especificado se crea en el archivo actual de taC.
+>>> delete [breakpoint index] : elimina el breakpoint seleccionado
+>>> info break : Da información sobre los breakpoints presentes
+>>> cont: para continuar con la ejecución hasta el siguiente punto de interrupción, o el final del programa
+>>> next: para ejecutar la siguiente sentencia del programa sin detenerse dentro de las llamadas a funciones
+>>> step: para ejecutar la siguiente sentencia del programa, deteniéndose dentro de las llamadas a funciones
+>>> finish: para ejecutarse hasta que la función actual regrese, o hasta el siguiente punto de interrupción
+>>> print [expression] : Imprime el valor de una expresión dada.
+>>> display [expression] : Permite la visualización automática de ciertas expresiones cada vez que GDB se detiene en un punto de interrupción o después de un paso.
+>>> set args [Arguments] : Establece los argumentos por defecto para el programa debugged.
+
+>>> valgrind --tool=callgrind <command> : marco de trabajo que proporciona instrumentación para binarios de espacio de usuario. Permite ver los diferentes misses de cache, entre otras cosas.
+
+{S6}
+#>> write(fd, &num, size) : Escribe en el filedescriptor el contenido en el puntero dado con el tamaño de bytes especificados.
+*** casting: cambiar el tipo de una variable. e.g. float b = 2.1; (char)b = ☻
+#>> strcmp(str1, str2): La función retorna un número entero mayor, igual, o menor que cero, apropiadamente según la cadena apuntada por str1 es mayor, igual, o menor que la cadena str2(alfabéticamente).
+>>> Ctrl + Z : para suspender procesos, permitiéndole reanudarlos más tarde
+>>> Ctrl + C : es para terminar procesos por la fuerza, kill
+>>> tar czvf name.tar.gz <files> : Crea un comprimido e.g. tar czvf session6.tar.gz answers.txt Makefile *.c
+
+{S7}
+>>> lscpu : Equivalente a less /proc/cpuinfo permite ver información de la arqutectura del CPU
+OS contienene una carptepa especial /proc (seudoarchivos de información sobre procesos) que contiene muchos datos sobre las características del entorno, así como el estado actual de lo que ocurre en el sistema. Entre las especificaciones, verá siblings que se refiere al número total de hardware threads (también conocidos como unidades de procesamiento en Linux) y cores del procesador.
+>>> sudo <command> : eleva temporalmente tus permisos como usuario «root».
+>>> apt-get : para instalar un determinado software necesario
+>>> lstopo : Equivalente a hwloc-ls muestra un png con información adicional 
+>>> top: Este comando muestra el estado actual del sistema y de todos los procesos que se ejecutan en él
+
+Es posible crear archivos speciales .sh, conocidos como shell scripts, que consisten en agrupación, que pueden ser interpretados por Bash Shell en la terminal 
+>>> time <command> :  determinar el tiempo de ejecución de una operación específica
+La suma del tiempo de user y system no tiene porque dar el total, elapsed time, ya que el programa puede hacer estado activo pero en espera (waiting) sin ejecutar ningún proceso.
+
+{S8}
+>>> ps:  muestra los procesos en una lista con información detallada
+>>> pstree : muestra un diagrama con los procesos y información simplificada
+	pstree -p : RECOMENDBLE para ver los PIDs
+>>> htop : mezcla de top y ps, muestra información detallada con una interfaz interactiva
+>>> taskset :establecer o recuperar la afinidad de CPU de un proceso en ejecución dado su pid, o para lanzar un nuevo comando con una afinidad de CPU dada.
+>>> /usr/bin/time : muestra el tiempo de ejecución total (elapsed time)
+
+En el gestionador de procesos en Linux contiene los conceptos de priority PR y niceness NI. rt significa real-time. El valor de prioridad no se puede cambiar y viene determinado por el OS, pero el niceness si se puede, siendo la prioridad actualizada PR += NI
+>>> renice -n <niceness> <pid> : añade el valor dado de niceness al actual.
+
+Linux y otro sistemas Unix tienen una carpeta special llamada /proc mantiene dinámicamente actualizado, que contiene datos sobre el estado del sistema. /proc/<pid>/ tiene una lista de archivos y subcarpetas que muestran información del proceso con dicho pid. Se recomienda examinar estas carpetas con ls -la. /proc/<pid>/status le muestra información resumida detallada del estado actual del proceso. Los estados pueden ser Created, Ready, Running, Waiting, Terminated.
+
+{S9}
+Un proceso para consultar un @ le pide @logicas al TLB (parte de MMU que viene regulado por el kernel  y cosas que no deveriamos saber) y este devuelde las @fisicas que serán consultadas en la RAM. Una vez conocido el valor este de devuelve al proceso. El proceso nunca sabe como está la memoria fisica, simpre trabaja con @logicas. Esto ofrece la versatilidad de que @fisicas pueden cambiar sin perjudicar al proceso. La memoria virtual se particiona y se ordena por secciones de código, datos, heap , ___, stack. Lo que implica que lib.so se guardan en el stack y las variables temporales (como las generadas por recursividad)
+/proc/<pid>/maps Es un archivo de texto que puede ser consultado con comandos como more y contiene la distribución de punteros por la memoria virtual.
+
+Cuando se carga una variable con demasiado peso, el stack se ha de ampliar, lo cual se ve reflejado en /maps
+>>> top -p <pid> : enseña unicamente el proceso dado
+Analogamente funciona en python.
+
+{S10}
+/proc/devices resume los distintos tipos de dispositivos reconocibles en el sistema, clasificados por dispositivos de «bloque» o «carácter», y los números «mayores» (es decir, de qué tipo de dispositivo se trata) y el nombre del mismo.
+/dev se utiliza como carpeta predeterminada para reunir los del sistema. Simbolos b y c previos a los permisos rwx entre otros, respectivamente corresponden a los dispositivos basados en la transferencia de «bloques» o «caracteres. 
+En mediante ps se puede ver la columna TTy que representa el terminal al que está vinculado el proceso. En /dev/pts se puede ver cada file descriptor a que dispositivo está asociado.
+>>> strace <args> : arrancarlo junto al programa al que se efectúa el trazado, el cual imprime una lista de las llamadas al sistema que ejecuta. e.g. strace -o output.dat -e read,write ./programa …
+
+>>> __ < __ : redirige a leer
+>>> __ > __ : redirige a escribir 
+>>> __ <> __ : redirige a leer-escribir
+
+
+
+
+
+
+
