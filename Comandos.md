@@ -35,6 +35,8 @@ Envía una señal a un proceso. Por ejemplo, `kill -9 PID` envía la señal SIGK
 Escribe las librerías enlazadas dinámicamente.
 17. `/usr/bin/time ./executable.exe`
 Devuelve el tiempo transcurrido en la ejecución.
+18. `/proc/<PID>/maps`
+Si se hace mientras se ejecuta un programa, devuelve las @ de memoria (se puede extraer información sobre el heap, stack...)
 
 ## GCC
 
