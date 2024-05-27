@@ -31,6 +31,10 @@ Te da mas info sobre el comando.
 15. `kill`
 Envía una señal a un proceso. Por ejemplo, `kill -9 PID` envía la señal SIGKILL al proceso con el PID especificado.
 (mata cosas)
+16. `ldd`
+Escribe las librerías enlazadas dinámicamente.
+17. `/usr/bin/time ./executable.exe
+Devuelve el tiempo transcurrido en la ejecución.
 
 ## GCC
 
