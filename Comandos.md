@@ -33,7 +33,7 @@ Envía una señal a un proceso. Por ejemplo, `kill -9 PID` envía la señal SIGK
 (mata cosas)
 16. `ldd`
 Escribe las librerías enlazadas dinámicamente.
-17. `/usr/bin/time ./executable.exe
+17. `/usr/bin/time ./executable.exe`
 Devuelve el tiempo transcurrido en la ejecución.
 
 ## GCC
